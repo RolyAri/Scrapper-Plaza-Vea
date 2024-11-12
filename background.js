@@ -12,17 +12,21 @@ chrome.runtime.onConnect.addListener(function(port) {
             });
         }
         if (msg.cmd == "finish-scrap") {
-            const {products} = msg;
-            chrome.storage.local.set({ "products": products }).then(() => {
+            const {allproducts} = msg;
+            /* chrome.storage.local.set({ "products": products }).then(() => {
                 console.log("Value is set");
-              });
+              }); */
               
         }
         if (msg.cmd == "get-products") {
-            chrome.storage.local.get(["products"]).then((result) => {
+            /* chrome.storage.local.get(["products"]).then((result) => {
                 port.postMessage({cmd: 'result-products', result})
               });
-              
+               */
+              chrome.storage.local.get(["allProducts"]).then((result) => {
+                port.postMessage({cmd: 'result-products', result})
+                console.log(result)
+              });
         }
     });
 });

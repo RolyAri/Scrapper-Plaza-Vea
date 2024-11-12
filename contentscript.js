@@ -36,7 +36,7 @@ chrome.runtime.onMessage.addListener(
             /* totalPages = veaPages[veaPages.length-1].innerText; */
             /* const products = scrappingProducts(); */
             /* port.postMessage({cmd: "finish-scrap", products, currentPage, totalPages}) */
-            port.postMessage({cmd: "finish-scrap", products, currentPage, totalPages})
+            /* port.postMessage({cmd: "finish-scrap", products, currentPage, totalPages}) */
             //sendResponse(products)
         }
             
