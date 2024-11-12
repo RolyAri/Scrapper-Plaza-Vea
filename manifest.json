@@ -1,0 +1,22 @@
+{
+    "name": "scraping-plaza-vea",
+    "description": "Extrae la información de los productos de plaza vea",
+    "manifest_version": 3,
+    "version": "1.0",
+    "permissions": ["activeTab", "scripting", "tabs", "storage"],
+    "background": {
+      "service_worker": "background.js"
+    },
+    "content_scripts": [
+      {
+        "matches": [
+          "https://www.plazavea.com.pe/*"
+        ],
+        "js": ["./contentscript.js"]
+      }
+    ],
+    "action": {
+      "default_popup": "./popup/index.html"
+    }
+  }
+  
