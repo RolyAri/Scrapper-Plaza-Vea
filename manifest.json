@@ -3,7 +3,7 @@
     "description": "Extrae la información de los productos de plaza vea",
     "manifest_version": 3,
     "version": "1.0",
-    "permissions": ["activeTab", "scripting", "tabs", "storage"],
+    "permissions": ["activeTab", "scripting", "tabs", "storage", "downloads"],
     "background": {
       "service_worker": "background.js"
     },

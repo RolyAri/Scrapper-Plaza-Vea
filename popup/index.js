@@ -22,5 +22,12 @@ port.onMessage.addListener(function(msg) {
         const {result} = msg;
         const txtData = document.getElementById('txt-data');
         txtData.innerText = JSON.stringify(result,null,2)
+
+        // Descargar como Excel
+        const worksheet = XLSX.utils.json_to_sheet(result.allProducts);
+        const workbook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(workbook, worksheet, "Productos");
+
+        XLSX.writeFile(workbook, "productos.xlsx");
     }
 });

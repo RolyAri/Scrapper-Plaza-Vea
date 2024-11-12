@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(
             totalPages = veaPages[veaPages.length-1].innerText;
 
             let allProducts = []
-
+            
             while (currentPage < totalPages) {
                 const products = scrappingProducts();
                 allProducts = allProducts.concat(products);
