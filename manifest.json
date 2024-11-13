@@ -1,5 +1,5 @@
 {
-    "name": "scraping-plaza-vea",
+    "name": "plaza-vea-scrapper-reto",
     "description": "Extrae la información de los productos de plaza vea",
     "manifest_version": 3,
     "version": "1.0",

@@ -1,3 +1,5 @@
+
+
 chrome.runtime.onConnect.addListener(function(port) {
     port.onMessage.addListener(function(msg) {
         console.log(msg)
@@ -36,6 +38,10 @@ chrome.runtime.onConnect.addListener(function(port) {
               /* chrome.storage.local.remove("allProducts", () => {
                 console.log("La clave 'allProducts' ha sido eliminada.");
             }); */
+        }
+        if (msg.cmd == "get-categories-final"){
+            const {result} = msg
+            console.log(result)
         }
     });
 });

@@ -1,6 +1,5 @@
 // div.Showcase__content contenedor del producto
 // Showcase__name nombre Showcase__SellerName distribuidor Showcase__salePrice precio
-console.log('Ejecutando content script plaza vea V2.0')
 
 
 function delay(time) {
@@ -17,9 +16,14 @@ chrome.runtime.onMessage.addListener(
             totalPages = veaPages[veaPages.length-1].innerText;
 
             let allProducts = []
+            /* scrappingCategories(); */
             
             while (currentPage < totalPages) {
                 const products = scrappingProducts();
+                
+                if (products.length == 0){
+                    break;
+                }
                 allProducts = allProducts.concat(products);
     
                 // Envia los productos de la página actual al background
@@ -32,12 +36,18 @@ chrome.runtime.onMessage.addListener(
                 }
                 
                 currentPage++; // Incrementa el contador de página
+                
             }
             /* totalPages = veaPages[veaPages.length-1].innerText; */
             /* const products = scrappingProducts(); */
             /* port.postMessage({cmd: "finish-scrap", products, currentPage, totalPages}) */
             /* port.postMessage({cmd: "finish-scrap", products, currentPage, totalPages}) */
             //sendResponse(products)
+        }
+        if (request.cmd == "get-categories"){
+            const categories = scrappingCategories();
+            console.log(categories)
+            port.postMessage({cmd: "get-categories-final", categories})
         }
             
     }
@@ -61,6 +71,14 @@ async function goToNextPage() {
     if (nextPageButton) {
         nextPageButton.click(); // Simula clic en el botón "Siguiente"
     }
+}
+
+function scrappingCategories(){
+    const menuButton = document.getElementById('menu-button-sticky');
+    menuButton.click();
+    let categories = [...document.querySelectorAll('.MainMenu__wrapper__categories.active.marginLeft>ul>li.MainMenu__wrapper__departments__item')]
+    menuButton.click();
+    return categories;
 }
 /* delay(5000).then(() => {
     let cards = document.querySelectorAll('div.vitrine>div.vitrine__products>div>div>div>div>div.ShowcaseGrid>div.showcase-grid>div>div.Showcase__content')

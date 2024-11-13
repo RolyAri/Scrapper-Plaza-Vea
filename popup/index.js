@@ -1,5 +1,6 @@
 const buttonScrapt = document.getElementById('btn-scrap');
 const buttonProducts = document.getElementById('btn-product');
+const buttonCategories = document.getElementById('btn-category');
 const port = chrome.runtime.connect({name: "background"})
 
 /* buttonScrapt.addEventListener('click', async () => {
@@ -16,12 +17,17 @@ buttonProducts.addEventListener('click', async () => {
     port.postMessage({cmd: "get-products"})
 })
 
+/* buttonCategories.addEventListener('click',async ()=>{
+    const [tab] = await chrome.tabs.query({active: true, lastFocusedWindow: true});
+    const response = await chrome.tabs.sendMessage(tab.id, {cmd: "get-categories"});
+})
+ */
 
 port.onMessage.addListener(function(msg) {
     if (msg.cmd === 'result-products'){
         const {result} = msg;
-        const txtData = document.getElementById('txt-data');
-        txtData.innerText = JSON.stringify(result,null,2)
+        /* const txtData = document.getElementById('txt-data');
+        txtData.innerText = JSON.stringify(result,null,2) */
 
         // Descargar como Excel
         const worksheet = XLSX.utils.json_to_sheet(result.allProducts);
